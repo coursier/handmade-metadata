@@ -25,9 +25,17 @@ export TEST_REPOSITORY_PASSWORD="pass"
 
 export TEST_REPOSITORY="http://$TEST_REPOSITORY_HOST:$TEST_REPOSITORY_PORT"
 
+if [ "$COURSIER" == "" ]; then
+  COURSIER_CMD=(java -jar "$(dirname "${BASH_SOURCE[0]}")/../coursier")
+else
+  COURSIER_CMD=("$COURSIER")
+fi
+
 # see https://unix.stackexchange.com/questions/90244/bash-run-command-in-background-and-capture-pid
 runServerBg() {
-  java -jar "$(dirname "${BASH_SOURCE[0]}")/../coursier" launch \
+  "${COURSIER_CMD[@]}" fetch \
+    "io.get-coursier:http-server_2.12:1.0.0"
+  "${COURSIER_CMD[@]}" launch \
     "io.get-coursier:http-server_2.12:1.0.0" \
     -- \
       -d "$(dirname "${BASH_SOURCE[0]}")/../data/http/abc.com" \
