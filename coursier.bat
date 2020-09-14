@@ -1,5 +1,7 @@
 @echo off
 
+
+
 @REM set %HOME% to equivalent of $HOME
 if "%HOME%" == "" (set HOME=%HOMEDRIVE%%HOMEPATH%)
 
@@ -50,7 +52,7 @@ goto endInit
 
 :Win9xArg
 @REM Slurp the command line arguments.  This loop allows for an unlimited number
-@REM of agruments (up to the command line limit, anyway).
+@REM of arguments (up to the command line limit, anyway).
 set CMD_LINE_ARGS=
 :Win9xApp
 if %1a==a goto endInit
@@ -67,7 +69,7 @@ SET PSEP=;
 
 @REM Start Java program
 :runm2
-SET CMDLINE=%JAVA_EXE% -noverify %JAVA_OPTS% -Dprog.dir="%PROG_DIR:\=\\%" -jar "%JAR_PATH%" %CMD_LINE_ARGS%
+SET CMDLINE=%JAVA_EXE%  %JAVA_OPTS% -Dprog.dir="%PROG_DIR:\=\\%" -jar "%JAR_PATH%" %CMD_LINE_ARGS%
 %CMDLINE%
 if ERRORLEVEL 1 goto error
 goto end
